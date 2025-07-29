@@ -78,7 +78,7 @@ const HeroSection = () => {
         
         <div className="hero-avatar">
           <div className="avatar-glow">
-            <img src="/myphoto.jpg" alt="Vasu Paul Jayakar" />
+            <img src="/assets/myphoto.jpg" alt="Vasu Paul Jayakar" />
           </div>
         </div>
       </div>
