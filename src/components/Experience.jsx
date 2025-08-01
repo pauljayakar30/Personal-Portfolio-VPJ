@@ -2,47 +2,29 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
-const Education = () => {
+const Experience = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   })
 
-  const educationData = [
+  const experienceData = [
     {
       id: 1,
-      title: "Higher Secondary Education",
-      company: "Sainik School Kalikiri",
-      duration: "2018 - 2022",
-      type: "Full-time",
-      location: "Kalikiri, Andhra Pradesh",
-      description: "Completed higher secondary education with a focus on Science (PCM) and leadership development in a prestigious military school environment.",
-      technologies: ["Mathematics", "Physics", "Chemistry", "Leadership", "Team Management"],
+      title: "Your Job Title",
+      company: "Company Name",
+      duration: "Start Date - End Date",
+      type: "Full-time / Internship / Freelance",
+      location: "Location",
+      description: "Brief description of your role and responsibilities...",
+      technologies: ["Tech1", "Tech2", "Tech3"],
       achievements: [
-        "Percentage: 92% - Outstanding Performance",
-        "Mathematics, Physics, Chemistry specialization",
-        "Leadership & Discipline training",
-        "Sports & Physical Fitness Excellence",
-        "Academic Excellence Award"
-      ]
-    },
-    {
-      id: 2,
-      title: "B.Tech in Artificial Intelligence & Machine Learning",
-      company: "Mohan Babu University",
-      duration: "2022 - 2026",
-      type: "Full-time",
-      location: "Tirupati, Andhra Pradesh",
-      description: "Pursuing a comprehensive program focused on AI/ML technologies, software development, and data science with strong academic performance.",
-      technologies: ["Python", "Machine Learning", "Deep Learning", "Data Science", "Web Development"],
-      achievements: [
-        "CGPA: 8.5/10 - Academic Excellence",
-        "Core Programming & Software Engineering",
-        "Machine Learning & Deep Learning Fundamentals",
-        "Data Science & Analytics Projects",
-        "Mathematical Foundations for AI"
+        "Achievement 1",
+        "Achievement 2", 
+        "Achievement 3"
       ]
     }
+    // Add more experience items as needed
   ]
 
   const containerVariants = {
@@ -68,7 +50,7 @@ const Education = () => {
   }
 
   return (
-    <section className="experience-section" id="education" ref={ref}>
+    <section className="experience-section" id="experience" ref={ref}>
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -77,8 +59,11 @@ const Education = () => {
           className="section-header"
         >
           <h2 className="section-title">
-            Education
+            Experience
           </h2>
+          <p className="section-subtitle">
+            My professional journey and work experience
+          </p>
         </motion.div>
 
         <motion.div
@@ -87,9 +72,9 @@ const Education = () => {
           animate={inView ? "visible" : "hidden"}
           className="experience-timeline"
         >
-          {educationData.map((education, index) => (
+          {experienceData.map((experience, index) => (
             <motion.div
-              key={education.id}
+              key={experience.id}
               variants={itemVariants}
               className="experience-item"
               whileHover={{
@@ -98,31 +83,33 @@ const Education = () => {
               }}
             >
               <div className="experience-card">
+                <div className="timeline-dot"></div>
+                
                 <div className="experience-header">
                   <div className="title-section">
-                    <h3 className="job-title">{education.title}</h3>
-                    <h4 className="company-name">{education.company}</h4>
+                    <h3 className="job-title">{experience.title}</h3>
+                    <h4 className="company-name">{experience.company}</h4>
                   </div>
                   <div className="meta-section">
-                    <span className="duration-badge">{education.duration}</span>
-                    <span className="type-badge">{education.type}</span>
-                    {education.location && (
+                    <span className="duration-badge">{experience.duration}</span>
+                    <span className="type-badge">{experience.type}</span>
+                    {experience.location && (
                       <span className="location-badge">
                         <i className="fas fa-map-marker-alt"></i>
-                        {education.location}
+                        {experience.location}
                       </span>
                     )}
                   </div>
                 </div>
 
                 <div className="experience-content">
-                  <p className="job-description">{education.description}</p>
+                  <p className="job-description">{experience.description}</p>
 
-                  {education.achievements && education.achievements.length > 0 && (
+                  {experience.achievements && experience.achievements.length > 0 && (
                     <div className="achievements">
-                      <h5 className="achievements-title">Key Highlights:</h5>
+                      <h5 className="achievements-title">Key Achievements:</h5>
                       <ul className="achievements-list">
-                        {education.achievements.map((achievement, i) => (
+                        {experience.achievements.map((achievement, i) => (
                           <motion.li
                             key={i}
                             initial={{ opacity: 0, x: -20 }}
@@ -140,11 +127,11 @@ const Education = () => {
                     </div>
                   )}
 
-                  {education.technologies && education.technologies.length > 0 && (
+                  {experience.technologies && experience.technologies.length > 0 && (
                     <div className="technologies">
-                      <h5 className="tech-title">Key Areas:</h5>
+                      <h5 className="tech-title">Technologies Used:</h5>
                       <div className="tech-stack">
-                        {education.technologies.map((tech, i) => (
+                        {experience.technologies.map((tech, i) => (
                           <motion.span
                             key={i}
                             className="tech-tag"
@@ -170,9 +157,24 @@ const Education = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {experienceData.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="no-experience"
+          >
+            <div className="empty-state">
+              <i className="fas fa-briefcase empty-icon"></i>
+              <h3>Experience Coming Soon</h3>
+              <p>I'm currently building my professional experience. Check back soon for updates!</p>
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   )
 }
 
-export default Education
+export default Experience

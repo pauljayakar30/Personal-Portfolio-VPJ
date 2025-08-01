@@ -1,11 +1,13 @@
 import './App.css';
 import Home from './pages/Home';
 import Skills from './components/Skills';
-import Education from './components/Education';
 import Projects from './components/Projects';
+import Experience from './components/Experience';
+import Education from './components/Education';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Navigation from './components/Navigation';
+import BottomNavigation from './components/BottomNavigation';
 import FooterComponent from './components/FooterComponent';
 import { useEffect, useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
@@ -49,6 +51,9 @@ function App() {
         <section id="projects">
           <Projects />
         </section>
+        <section id="experience">
+          <Experience />
+        </section>
         <section id="education">
           <Education />
         </section>
@@ -59,6 +64,7 @@ function App() {
           <Contact />
         </section>
       </main>
+      <BottomNavigation />
       <FooterComponent />
       <Analytics />
     </div>

@@ -5,42 +5,85 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [shouldHideNavbar, setShouldHideNavbar] = useState(false)
+  const [navbarOpacity, setNavbarOpacity] = useState(1)
 
   const navItems = [
     { id: 'home', label: 'Home', icon: 'fas fa-home' },
     { id: 'skills', label: 'Skills', icon: 'fas fa-code' },
-    { id: 'education', label: 'Education', icon: 'fas fa-graduation-cap' },
     { id: 'projects', label: 'Projects', icon: 'fas fa-laptop-code' },
+    { id: 'experience', label: 'Experience', icon: 'fas fa-briefcase' },
+    { id: 'education', label: 'Education', icon: 'fas fa-graduation-cap' },
     { id: 'certifications', label: 'Certifications', icon: 'fas fa-certificate' },
     { id: 'contact', label: 'Contact', icon: 'fas fa-envelope' }
   ]
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+    let ticking = false
 
-    const handleSectionInView = () => {
-      const sections = navItems.map(item => item.id)
-      
-      for (const sectionId of sections) {
-        const section = document.getElementById(sectionId)
-        if (section) {
-          const rect = section.getBoundingClientRect()
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(sectionId)
-            break
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY
+          setIsScrolled(scrollY > 50)
+
+          // Simple logic: Always keep navbar visible unless bottom navigation is actually visible
+          const bottomNav = document.querySelector('.bottom-navigation')
+          
+          if (bottomNav) {
+            const bottomNavRect = bottomNav.getBoundingClientRect()
+            const windowHeight = window.innerHeight
+            
+            // Check if bottom navbar is visible on screen
+            const isBottomNavVisible = bottomNavRect.top < windowHeight && bottomNavRect.bottom > 0
+            
+            if (isBottomNavVisible) {
+              // Calculate how much of bottom navbar is visible
+              const visibleHeight = Math.min(bottomNavRect.bottom, windowHeight) - Math.max(bottomNavRect.top, 0)
+              const totalHeight = bottomNavRect.height
+              const visibilityRatio = visibleHeight / totalHeight
+              
+              // Gradually fade top navbar as bottom navbar becomes more visible
+              const opacity = Math.max(0, 1 - visibilityRatio)
+              setNavbarOpacity(opacity)
+              
+              // Disable functionality when bottom navbar is 90% visible
+              setShouldHideNavbar(visibilityRatio >= 0.9)
+            } else {
+              // Bottom nav not visible, keep top nav fully visible
+              setNavbarOpacity(1)
+              setShouldHideNavbar(false)
+            }
+          } else {
+            // No bottom nav found, keep top nav visible
+            setNavbarOpacity(1)
+            setShouldHideNavbar(false)
           }
-        }
+
+          // Handle active section detection
+          const sections = navItems.map(item => item.id)
+          
+          for (const sectionId of sections) {
+            const section = document.getElementById(sectionId)
+            if (section) {
+              const rect = section.getBoundingClientRect()
+              if (rect.top <= 100 && rect.bottom >= 100) {
+                setActiveSection(sectionId)
+                break
+              }
+            }
+          }
+
+          ticking = false
+        })
+        ticking = true
       }
     }
 
     window.addEventListener('scroll', handleScroll)
-    window.addEventListener('scroll', handleSectionInView)
     
     return () => {
       window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('scroll', handleSectionInView)
     }
   }, [])
 
@@ -61,20 +104,16 @@ const Navigation = () => {
       <motion.nav
         className={`navbar ${isScrolled ? 'scrolled' : ''}`}
         initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        animate={{ 
+          y: 0,
+          opacity: navbarOpacity
+        }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
+        style={{ 
+          pointerEvents: shouldHideNavbar ? 'none' : 'auto'
+        }}
       >
         <div className="nav-container">
-          <motion.div
-            className="nav-brand"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <a href="#home" onClick={() => scrollToSection('home')}>
-              VPJ
-            </a>
-          </motion.div>
-
           {/* Desktop Navigation */}
           <div className="nav-menu desktop-menu">
             {navItems.map((item, index) => (

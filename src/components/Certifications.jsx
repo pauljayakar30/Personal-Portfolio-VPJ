@@ -141,9 +141,6 @@ const Certifications = () => {
           <motion.h2 variants={itemVariants} className="section-title">
             Certifications & Badges
           </motion.h2>
-          <motion.p variants={itemVariants} className="section-subtitle">
-            Professional certifications in AI/ML, Cloud Computing, and Technology
-          </motion.p>
         </motion.div>
 
         <motion.div

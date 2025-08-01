@@ -114,9 +114,6 @@ const Projects = () => {
           <motion.h2 variants={itemVariants} className="section-title">
             Projects
           </motion.h2>
-          <motion.p variants={itemVariants} className="section-subtitle">
-            Innovative solutions combining AI/ML with modern web technologies
-          </motion.p>
         </motion.div>
 
         <motion.div

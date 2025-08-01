@@ -1,0 +1,92 @@
+/* Bottom Navigation Styles */
+.bottom-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(139, 92, 246, 0.3);
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+.bottom-nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #b3b3b3;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  min-width: 0;
+  flex: 1;
+  max-width: 80px;
+}
+
+.bottom-nav-item:hover {
+  color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.bottom-nav-item i {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.bottom-nav-item span {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Hide on larger screens */
+@media (min-width: 769px) {
+  .bottom-navigation {
+    display: none;
+  }
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 480px) {
+  .bottom-nav-container {
+    padding: 0 10px;
+  }
+  
+  .bottom-nav-item {
+    padding: 6px 8px;
+  }
+  
+  .bottom-nav-item i {
+    font-size: 16px;
+  }
+  
+  .bottom-nav-item span {
+    font-size: 11px;
+  }
+}
+
+/* New bottom navigation specific styles */
+.bottom-nav-icon {
+  margin-bottom: 2px;
+}
+
+.bottom-nav-label {
+  font-size: 11px;
+}

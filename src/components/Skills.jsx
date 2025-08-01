@@ -68,9 +68,6 @@ const Skills = () => {
           <motion.h2 variants={itemVariants} className="section-title">
             Skills & AIML Coursework
           </motion.h2>
-          <motion.p variants={itemVariants} className="section-subtitle">
-            Core skills and subjects relevant to Artificial Intelligence & Machine Learning
-          </motion.p>
         </motion.div>
 
         <motion.div
