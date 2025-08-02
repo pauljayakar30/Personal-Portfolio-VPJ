@@ -16,6 +16,10 @@
       "dest": "/assets/$1"
     },
     {
+      "src": "/.*\\.pdf$",
+      "dest": "/$0"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }

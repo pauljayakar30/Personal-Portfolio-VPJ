@@ -53,7 +53,7 @@ const HeroSection = () => {
           
           <div className="hero-actions">
             <a 
-              href="./Vasu-Paul-Jayakar-Resume.pdf" 
+              href="/Vasu-Paul-Jayakar-Resume.pdf" 
               className="btn-resume" 
               target="_blank" 
               rel="noopener noreferrer"
