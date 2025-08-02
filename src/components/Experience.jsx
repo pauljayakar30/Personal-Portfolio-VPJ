@@ -11,20 +11,53 @@ const Experience = () => {
   const experienceData = [
     {
       id: 1,
-      title: "Your Job Title",
-      company: "Company Name",
-      duration: "Start Date - End Date",
-      type: "Full-time / Internship / Freelance",
-      location: "Location",
-      description: "Brief description of your role and responsibilities...",
-      technologies: ["Tech1", "Tech2", "Tech3"],
+      title: "Google AI-ML Virtual Internship",
+      company: "Google (via EduSkills & AICTE)",
+      duration: "August 2025 - September 2025 (Ongoing)",
+      type: "Virtual Internship",
+      location: "Remote",
+      description: "Currently participating in Google's AI-ML Virtual Internship program focusing on machine learning fundamentals, AI applications, and hands-on projects with Google's AI technologies.",
+      technologies: ["Machine Learning", "Artificial Intelligence", "Python", "TensorFlow", "Google AI Platform"],
       achievements: [
-        "Achievement 1",
-        "Achievement 2", 
-        "Achievement 3"
+        "Part of Cohort 13 in EduSkills platform",
+        "Gaining hands-on experience with Google AI tools",
+        "Developing practical ML skills through guided projects",
+        "Enhancing understanding of AI/ML industry applications"
       ]
+    },
+    {
+      id: 2,
+      title: "Web Development Internship",
+      company: "ApexPlanet Software Pvt. Ltd.",
+      duration: "August 2025 - September 2025 (Ongoing)",
+      type: "Internship",
+      location: "Remote",
+      description: "Currently focused on front-end web development using core technologies, building responsive and interactive web applications with modern development practices.",
+      technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Web Development"],
+      achievements: [
+        "Developing responsive web interfaces",
+        "Implementing interactive JavaScript features",
+        "Applying modern CSS styling techniques",
+        "Enhancing front-end development skills"
+      ]
+    },
+    {
+      id: 3,
+      title: "AWS AI-ML Virtual Internship",
+      company: "Amazon Web Services (AWS)",
+      duration: "April 2025 - June 2025",
+      type: "Virtual Internship",
+      location: "Remote",
+      description: "Comprehensive virtual internship program covering AWS cloud services, machine learning solutions, and AI implementations using AWS infrastructure and tools.",
+      technologies: ["AWS", "Machine Learning", "Cloud Computing", "Python", "AWS SageMaker"],
+      achievements: [
+        "Completed Cohort 12 successfully",
+        "Gained expertise in AWS ML services",
+        "Learned cloud-based AI/ML deployment",
+        "Developed practical cloud computing skills"
+      ],
+      certificate: "/assets/certificates/aws/AWS AIML Internship Certificate - VPJ.pdf"
     }
-    // Add more experience items as needed
   ]
 
   const containerVariants = {
@@ -61,9 +94,6 @@ const Experience = () => {
           <h2 className="section-title">
             Experience
           </h2>
-          <p className="section-subtitle">
-            My professional journey and work experience
-          </p>
         </motion.div>
 
         <motion.div
@@ -150,6 +180,33 @@ const Experience = () => {
                           </motion.span>
                         ))}
                       </div>
+                    </div>
+                  )}
+
+                  {experience.certificate && (
+                    <div className="certificate-section">
+                      <motion.a
+                        href={experience.certificate}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="certificate-button"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ 
+                          delay: 0.7 + (index * 0.1),
+                          duration: 0.4
+                        }}
+                        whileHover={{
+                          scale: 1.05,
+                          transition: { duration: 0.2 }
+                        }}
+                        whileTap={{
+                          scale: 0.98
+                        }}
+                      >
+                        <i className="fas fa-certificate"></i>
+                        <span>View Certificate</span>
+                      </motion.a>
                     </div>
                   )}
                 </div>
