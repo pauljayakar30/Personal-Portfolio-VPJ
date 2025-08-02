@@ -2359,6 +2359,128 @@ body {
   filter: blur(2px);
 }
 
+/* Laptop/Desktop screens - Compact footer */
+@media (min-width: 1024px) {
+  .footer-content {
+    padding: 2.5rem 2rem 1.5rem;
+  }
+  
+  .footer-main {
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+  }
+  
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+  }
+  
+  /* Brand section alignment */
+  .footer-brand {
+    justify-content: flex-start;
+  }
+  
+  /* Links section alignment */
+  .footer-links {
+    justify-content: flex-start;
+  }
+  
+  /* Social section alignment */
+  .footer-social {
+    justify-content: flex-start;
+  }
+  
+  .footer-title {
+    font-size: 1.6rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .footer-subtitle {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .footer-location {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .footer-section-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  .footer-links-grid {
+    gap: 0.6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    width: 100%;
+  }
+  
+  .footer-link {
+    font-size: 0.9rem;
+    padding: 0.2rem 0;
+    text-align: left;
+    justify-self: start;
+  }
+  
+  .footer-social-links {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+  
+  .footer-social-link {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+  
+  .footer-social-text {
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  
+  .footer-bottom {
+    padding-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .footer-bottom-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.3rem;
+  }
+  
+  .footer-copyright,
+  .footer-built {
+    font-size: 0.85rem;
+    margin: 0;
+  }
+  
+  .back-to-top {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+    position: static;
+    margin: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .footer-content {
     padding: 1.5rem 1.5rem 1rem;
