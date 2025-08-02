@@ -7,7 +7,6 @@ import Education from './components/Education';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Navigation from './components/Navigation';
-import BottomNavigation from './components/BottomNavigation';
 import FooterComponent from './components/FooterComponent';
 import { useEffect, useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
@@ -64,7 +63,6 @@ function App() {
           <Contact />
         </section>
       </main>
-      <BottomNavigation />
       <FooterComponent />
       <Analytics />
     </div>

@@ -22,8 +22,7 @@ const Projects = () => {
         "Performance Optimized"
       ],
       links: {
-        live: "#",
-        github: "https://github.com/pauljayakar30/portfolio"
+        github: "https://github.com/pauljayakar30/Personal-Portfolio-VPJ"
       },
       status: "completed"
     },

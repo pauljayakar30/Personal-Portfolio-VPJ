@@ -1131,70 +1131,9 @@ body {
   border-radius: 50%;
 }
 
-.mobile-menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: var(--radius-md);
-  transition: var(--transition-smooth);
-}
-
-.mobile-menu-toggle:hover {
-  background: rgba(139, 92, 246, 0.1);
-  color: var(--violet-primary);
-}
-
-.mobile-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: var(--pure-black);
-  border-top: 1px solid rgba(139, 92, 246, 0.1);
-}
-
-.mobile-menu-content {
-  padding: 1rem 2rem;
-}
-
-.mobile-nav-link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(139, 92, 246, 0.05);
-  transition: var(--transition-smooth);
-}
-
-.mobile-nav-link:hover,
-.mobile-nav-link.active {
-  color: var(--violet-primary);
-}
-
-.mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
-
 @media (max-width: 768px) {
   .desktop-menu {
     display: none;
-  }
-  
-  .mobile-menu-toggle {
-    display: block;
   }
   
   .nav-container {
@@ -2427,88 +2366,6 @@ body {
 }
 
 /* ========================= */
-/* BOTTOM NAVIGATION */
-/* ========================= */
-
-.bottom-navigation {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(10, 10, 10, 0.95);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(139, 92, 246, 0.2);
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  padding: 1rem 0;
-}
-
-.bottom-nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.bottom-nav-item {
-  position: relative;
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-md);
-  transition: var(--transition-smooth);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  min-width: 60px;
-  font-family: inherit;
-}
-
-.bottom-nav-item:hover {
-  background: rgba(139, 92, 246, 0.1);
-  color: var(--violet-primary);
-}
-
-.bottom-nav-item.active {
-  color: var(--violet-primary);
-  background: rgba(139, 92, 246, 0.15);
-}
-
-.bottom-nav-icon {
-  font-size: 1.2rem;
-  transition: var(--transition-smooth);
-}
-
-.bottom-nav-item:hover .bottom-nav-icon,
-.bottom-nav-item.active .bottom-nav-icon {
-  transform: scale(1.1);
-}
-
-.bottom-nav-label {
-  font-size: 0.7rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.bottom-nav-indicator {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--violet-primary), var(--violet-secondary));
-  border-radius: 0 0 3px 3px;
-  box-shadow: var(--shadow-glow);
-}
-
 /* ========================= */
 /* NAVBAR DISABLED STATE */
 /* ========================= */
@@ -2517,15 +2374,13 @@ body {
   pointer-events: none;
 }
 
-.nav-link.disabled,
-.mobile-nav-link.disabled,
-.mobile-menu-toggle.disabled {
+.nav-link.disabled {
   opacity: 0.5;
   cursor: default !important;
 }
 
 /* ========================= */
-/* RESPONSIVE DESIGN - BOTTOM NAV */
+/* RESPONSIVE DESIGN */
 /* ========================= */
 
 @media (max-width: 991px) {
@@ -3113,40 +2968,6 @@ body {
   .tech-tag {
     padding: 0.3rem 0.6rem;
     font-size: 0.8rem;
-  }
-  
-  .bottom-nav-container {
-    gap: 0.25rem;
-    padding: 0 0.5rem;
-  }
-  
-  .bottom-nav-item {
-    padding: 0.5rem 0.75rem;
-    min-width: 50px;
-  }
-  
-  .bottom-nav-icon {
-    font-size: 1rem;
-  }
-  
-  .bottom-nav-label {
-    font-size: 0.65rem;
-  }
-}
-
-@media (max-width: 390px) {
-  .bottom-nav-container {
-    gap: 0.125rem;
-    padding: 0 0.25rem;
-  }
-  
-  .bottom-nav-item {
-    padding: 0.4rem 0.5rem;
-    min-width: 45px;
-  }
-  
-  .bottom-nav-label {
-    font-size: 0.6rem;
   }
 }
 

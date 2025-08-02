@@ -3,10 +3,7 @@ import { motion } from 'framer-motion'
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
-  const [shouldHideNavbar, setShouldHideNavbar] = useState(false)
-  const [navbarOpacity, setNavbarOpacity] = useState(1)
 
   const navItems = [
     { id: 'home', label: 'Home', icon: 'fas fa-home' },
@@ -26,39 +23,6 @@ const Navigation = () => {
         requestAnimationFrame(() => {
           const scrollY = window.scrollY
           setIsScrolled(scrollY > 50)
-
-          // Simple logic: Always keep navbar visible unless bottom navigation is actually visible
-          const bottomNav = document.querySelector('.bottom-navigation')
-          
-          if (bottomNav) {
-            const bottomNavRect = bottomNav.getBoundingClientRect()
-            const windowHeight = window.innerHeight
-            
-            // Check if bottom navbar is visible on screen
-            const isBottomNavVisible = bottomNavRect.top < windowHeight && bottomNavRect.bottom > 0
-            
-            if (isBottomNavVisible) {
-              // Calculate how much of bottom navbar is visible
-              const visibleHeight = Math.min(bottomNavRect.bottom, windowHeight) - Math.max(bottomNavRect.top, 0)
-              const totalHeight = bottomNavRect.height
-              const visibilityRatio = visibleHeight / totalHeight
-              
-              // Gradually fade top navbar as bottom navbar becomes more visible
-              const opacity = Math.max(0, 1 - visibilityRatio)
-              setNavbarOpacity(opacity)
-              
-              // Disable functionality when bottom navbar is 90% visible
-              setShouldHideNavbar(visibilityRatio >= 0.9)
-            } else {
-              // Bottom nav not visible, keep top nav fully visible
-              setNavbarOpacity(1)
-              setShouldHideNavbar(false)
-            }
-          } else {
-            // No bottom nav found, keep top nav visible
-            setNavbarOpacity(1)
-            setShouldHideNavbar(false)
-          }
 
           // Handle active section detection
           const sections = navItems.map(item => item.id)
@@ -95,23 +59,15 @@ const Navigation = () => {
     setIsMobileMenuOpen(false)
   }
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
-
   return (
     <>
       <motion.nav
         className={`navbar ${isScrolled ? 'scrolled' : ''}`}
         initial={{ y: -100 }}
         animate={{ 
-          y: 0,
-          opacity: navbarOpacity
+          y: 0
         }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
-        style={{ 
-          pointerEvents: shouldHideNavbar ? 'none' : 'auto'
-        }}
       >
         <div className="nav-container">
           {/* Desktop Navigation */}
@@ -136,64 +92,8 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <motion.button
-            className="mobile-menu-toggle"
-            onClick={toggleMobileMenu}
-            whileTap={{ scale: 0.9 }}
-          >
-            <motion.i
-              className={isMobileMenuOpen ? 'fas fa-times' : 'fas fa-bars'}
-              animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-            ></motion.i>
-          </motion.button>
         </div>
-
-        {/* Mobile Navigation */}
-        <motion.div
-          className="mobile-menu"
-          initial={false}
-          animate={{
-            height: isMobileMenuOpen ? 'auto' : 0,
-            opacity: isMobileMenuOpen ? 1 : 0
-          }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          style={{ overflow: 'hidden' }}
-        >
-          <div className="mobile-menu-content">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.id}
-                href={`#${item.id}`}
-                className={`mobile-nav-link ${activeSection === item.id ? 'active' : ''}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  scrollToSection(item.id)
-                }}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isMobileMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                transition={{ delay: index * 0.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <i className={item.icon}></i>
-                <span>{item.label}</span>
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
       </motion.nav>
-
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <motion.div
-          className="mobile-menu-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
     </>
   )
 }
