@@ -1,8 +1,8 @@
 // Simple in-memory deduplication cache (will reset on serverless cold start)
 const recentSubmissions = new Map();
 
-export default async (req, res) => {
-  // Always set CORS headers - allow both your domains
+export default async function handler(req, res) {
+  // Always set CORS headers first
   const allowedOrigins = [
     'https://www.vasupauljayakar.tech',
     'https://personal-portfolio-vpj.vercel.app',
