@@ -63,6 +63,12 @@ export default async (req, res) => {
 
   try {
     console.log('Starting backend processing...');
+    console.log('Environment variables check:', {
+      hasGoogleCredentials: !!process.env.GOOGLE_CREDENTIALS_JSON,
+      hasGoogleSheetId: !!process.env.GOOGLE_SHEET_ID,
+      hasEmailUser: !!process.env.EMAIL_USER,
+      hasEmailPass: !!process.env.EMAIL_PASS
+    });
     
     // Use dynamic import for serverless compatibility
     const { appendRowToSheet } = await import('../backend/googleSheetsService.js');
