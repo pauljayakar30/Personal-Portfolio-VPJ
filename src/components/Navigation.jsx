@@ -11,8 +11,7 @@ const Navigation = () => {
     { id: 'projects', label: 'Projects', icon: 'fas fa-laptop-code' },
     { id: 'experience', label: 'Experience', icon: 'fas fa-briefcase' },
     { id: 'education', label: 'Education', icon: 'fas fa-graduation-cap' },
-    { id: 'certifications', label: 'Certifications', icon: 'fas fa-certificate' },
-    { id: 'contact', label: 'Contact', icon: 'fas fa-envelope' }
+    { id: 'certifications', label: 'Certifications', icon: 'fas fa-certificate' }
   ]
 
   useEffect(() => {

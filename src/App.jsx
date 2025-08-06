@@ -5,7 +5,6 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Education from './components/Education';
 import Certifications from './components/Certifications';
-import Contact from './components/Contact';
 import Navigation from './components/Navigation';
 import FooterComponent from './components/FooterComponent';
 import { useEffect, useState } from 'react';
@@ -58,9 +57,6 @@ function App() {
         </section>
         <section id="certifications">
           <Certifications />
-        </section>
-        <section id="contact">
-          <Contact />
         </section>
       </main>
       <FooterComponent />
