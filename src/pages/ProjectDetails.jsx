@@ -19,7 +19,6 @@ const ProjectDetails = () => {
         'Smooth scrolling navigation with active section highlighting',
         'Typing animation effect in the hero section',
         'AOS (Animate On Scroll) animations throughout',
-        'Contact form with backend integration',
         'Professional certifications showcase',
         'SEO optimized with proper meta tags'
       ],

@@ -7,7 +7,6 @@ This guide will help you deploy your React portfolio to various hosting platform
 - ✅ React app builds successfully (`npm run build`)
 - ✅ All components are working correctly
 - ✅ Dark mode toggle functions properly
-- ✅ Contact form connects to backend
 - ✅ All assets (images, certificates) are accessible
 - ✅ Responsive design tested on different screen sizes
 
@@ -153,19 +152,6 @@ This guide will help you deploy your React portfolio to various hosting platform
    ```
 
 ## 🔧 Environment Setup
-
-### Environment Variables (if needed)
-
-Create `.env` file in your project root:
-```env
-VITE_BACKEND_URL=https://paul-jayakar-portfolio-backend.vercel.app
-VITE_CONTACT_EMAIL=pauljayakar30@gmail.com
-```
-
-Access in your code:
-```javascript
-const backendUrl = import.meta.env.VITE_BACKEND_URL
-```
 
 ## 🚨 Common Deployment Issues & Solutions
 
