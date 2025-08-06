@@ -56,7 +56,6 @@ const Navigation = () => {
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' })
     }
-    setIsMobileMenuOpen(false)
   }
 
   return (
