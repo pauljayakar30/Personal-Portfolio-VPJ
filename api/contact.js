@@ -6,12 +6,17 @@ export default async (req, res) => {
   const allowedOrigins = [
     'https://www.vasupauljayakar.tech',
     'https://personal-portfolio-vpj.vercel.app',
-    'https://personal-portfolio-vpj-git-test-pauljayakar30.vercel.app' // test branch
+    'https://personal-portfolio-vpj-git-test-pauljayakar30.vercel.app',
+    'https://personal-portfolio-vpj-git-test-vasu-paul-jayakars-projects.vercel.app', // Your actual test URL
+    'https://personal-portfolio-vpj-vasu-paul-jayakars-projects.vercel.app' // Possible production URL
   ];
   
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    // Fallback for development or unlisted domains
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
   
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -19,15 +24,20 @@ export default async (req, res) => {
 
   // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
+    console.log('OPTIONS request received from:', req.headers.origin);
     res.status(200).end();
     return;
   }
 
   // Only allow POST
   if (req.method !== 'POST') {
+    console.log('Invalid method:', req.method);
     res.status(405).json({ success: false, error: 'Method not allowed' });
     return;
   }
+
+  console.log('POST request received from:', req.headers.origin);
+  console.log('Request body:', req.body);
 
   // Only process POST here
   const { name, email, subject, message } = req.body;
@@ -52,20 +62,36 @@ export default async (req, res) => {
   }
 
   try {
+    console.log('Starting backend processing...');
+    
     // Use dynamic import for serverless compatibility
     const { appendRowToSheet } = await import('../backend/googleSheetsService.js');
     const { sendNotificationEmail } = await import('../backend/emailService.js');
     
+    console.log('Backend modules imported successfully');
+    
     // Save to Google Sheets with source identifier
     const source = 'Personal-Portfolio-VPJ'; // Identifier for this portfolio
+    console.log('Attempting to save to Google Sheets...');
     await appendRowToSheet([new Date().toISOString(), name, email, subject, message, source]);
+    console.log('Google Sheets save successful');
     
     // Send email notification
+    console.log('Attempting to send email notification...');
     await sendNotificationEmail({ name, email, subject, message });
+    console.log('Email notification sent successfully');
     
     res.json({ success: true, message: 'Form submitted successfully!' });
   } catch (err) {
-    console.error('Backend error:', err);
-    res.status(500).json({ success: false, error: 'Server error occurred while processing your request.' });
+    console.error('Backend error details:', {
+      message: err.message,
+      stack: err.stack,
+      name: err.name
+    });
+    res.status(500).json({ 
+      success: false, 
+      error: 'Server error occurred while processing your request.',
+      details: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
   }
 };
