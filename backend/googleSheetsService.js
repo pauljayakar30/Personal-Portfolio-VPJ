@@ -13,7 +13,7 @@ export async function appendRowToSheet(row) {
   await sheets.spreadsheets.values.append({
     auth: client,
     spreadsheetId: process.env.GOOGLE_SHEET_ID,
-    range: 'Sheet1!A:E',
+    range: 'Sheet1!A:F', // Extended to column F for source identifier
     valueInputOption: 'USER_ENTERED',
     requestBody: { values: [row] },
   });

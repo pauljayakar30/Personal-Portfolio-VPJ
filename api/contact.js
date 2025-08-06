@@ -2,8 +2,18 @@
 const recentSubmissions = new Map();
 
 export default async (req, res) => {
-  // Always set CORS headers - update with your actual domain
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.vasupauljayakar.tech');
+  // Always set CORS headers - allow both your domains
+  const allowedOrigins = [
+    'https://www.vasupauljayakar.tech',
+    'https://personal-portfolio-vpj.vercel.app',
+    'https://personal-portfolio-vpj-git-test-pauljayakar30.vercel.app' // test branch
+  ];
+  
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -46,8 +56,9 @@ export default async (req, res) => {
     const { appendRowToSheet } = await import('../backend/googleSheetsService.js');
     const { sendNotificationEmail } = await import('../backend/emailService.js');
     
-    // Save to Google Sheets
-    await appendRowToSheet([new Date().toISOString(), name, email, subject, message]);
+    // Save to Google Sheets with source identifier
+    const source = 'Personal-Portfolio-VPJ'; // Identifier for this portfolio
+    await appendRowToSheet([new Date().toISOString(), name, email, subject, message, source]);
     
     // Send email notification
     await sendNotificationEmail({ name, email, subject, message });
