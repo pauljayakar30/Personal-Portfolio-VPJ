@@ -29,13 +29,45 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus('')
     
-    // Simulate form submission (replace with actual API call)
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      setSubmitStatus('success')
-      setFormData({ name: '', email: '', subject: '', message: '' })
+      // Use your backend - Express.js for local, Vercel API for production
+      const API_BASE_URL = process.env.NODE_ENV === 'production' 
+        ? 'https://www.vasupauljayakar.tech' // Your production domain
+        : 'http://localhost:5000' // Your Express.js backend port
+      
+      const endpoint = process.env.NODE_ENV === 'production'
+        ? `${API_BASE_URL}/api/contact` // Vercel serverless function
+        : `${API_BASE_URL}/contact` // Express.js endpoint
+      
+      console.log('Submitting to:', endpoint) // Debug log
+      
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}))
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`)
+      }
+
+      const result = await response.json()
+      
+      if (result.success) {
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+        console.log('Form submitted successfully:', result.message)
+      } else {
+        throw new Error(result.error || 'Failed to send message')
+      }
+      
     } catch (error) {
+      console.error('Contact form error:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
