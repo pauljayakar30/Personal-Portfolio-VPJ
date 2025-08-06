@@ -34,7 +34,7 @@ const Contact = () => {
     try {
       // Use your backend - Express.js for local, Vercel API for production
       const API_BASE_URL = process.env.NODE_ENV === 'production' 
-        ? 'https://www.vasupauljayakar.tech' // Your production domain
+        ? window.location.origin // Use current domain (works for all Vercel deployments)
         : 'http://localhost:5000' // Your Express.js backend port
       
       const endpoint = process.env.NODE_ENV === 'production'
