@@ -1132,6 +1132,12 @@ body {
   }
 }
 
+@media (max-width: 768px) {
+  .navbar {
+    display: none;
+  }
+}
+
 /* ========================= */
 /* SKILLS SECTION STYLES */
 /* ========================= */
@@ -1271,7 +1277,7 @@ body {
 }
 
 .projects-content {
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -1282,8 +1288,9 @@ body {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  justify-items: center;
 }
 
 .project-card {
@@ -1294,6 +1301,8 @@ body {
   box-shadow: var(--shadow-raised);
   transition: var(--transition-smooth);
   position: relative;
+  max-width: 600px;
+  width: 100%;
 }
 
 .project-card::before {
@@ -1988,11 +1997,9 @@ body {
   color: var(--text-muted);
   font-size: 0.9rem;
   margin: 0.3rem 0;
-}
-
-.footer-built i {
-  color: #ef4444;
-  margin: 0 0.3rem;
+  text-align: center;
+  width: 100%;
+  display: block;
 }
 
 .back-to-top {
@@ -2146,8 +2153,8 @@ body {
   .footer-bottom-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
     gap: 0.3rem;
   }
   
@@ -2155,6 +2162,8 @@ body {
   .footer-built {
     font-size: 0.85rem;
     margin: 0;
+    text-align: center;
+    width: 100%;
   }
   
   .back-to-top {

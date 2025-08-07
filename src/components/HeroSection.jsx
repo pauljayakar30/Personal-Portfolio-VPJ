@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { trackPortfolioEvent } from '../utils/analytics'
 
 const HeroSection = () => {
   const [text, setText] = useState('')
@@ -57,18 +58,33 @@ const HeroSection = () => {
               className="btn-resume" 
               target="_blank" 
               rel="noopener noreferrer"
+              onClick={() => trackPortfolioEvent.resumeDownload()}
             >
               <span>Resume</span>
             </a>
             
             <div className="hero-social">
-              <a href="https://linkedin.com/in/pauljayakar30" className="social-link" aria-label="LinkedIn">
+              <a 
+                href="https://linkedin.com/in/pauljayakar30" 
+                className="social-link" 
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackPortfolioEvent.socialLinkClick('LinkedIn')}
+              >
                 <i className="fab fa-linkedin"></i>
               </a>
-              <a href="https://github.com/pauljayakar30" className="social-link" aria-label="GitHub">
+              <a 
+                href="https://github.com/pauljayakar30" 
+                className="social-link" 
+                aria-label="GitHub"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackPortfolioEvent.socialLinkClick('GitHub')}
+              >
                 <i className="fab fa-github"></i>
               </a>
-              <a href="mailto:pauljayakar30@gmail.com" className="social-link" aria-label="Email">
+              <a href="mailto:pauljayakar30@gmail.com" className="social-link" aria-label="Email" onClick={() => trackPortfolioEvent.socialLinkClick('Email')}>
                 <i className="fas fa-envelope"></i>
               </a>
             </div>
@@ -77,7 +93,7 @@ const HeroSection = () => {
         
         <div className="hero-avatar">
           <div className="avatar-glow">
-            <img src="/assets/myphoto.jpg" alt="Vasu Paul Jayakar" />
+            <img src="/myphoto.jpg" alt="Vasu Paul Jayakar" />
           </div>
         </div>
       </div>

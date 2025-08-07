@@ -174,7 +174,7 @@ const FooterComponent = () => {
               &copy; {currentYear} Vasu Paul Jayakar. All rights reserved.
             </p>
             <p className="footer-built">
-              Built with <i className="fas fa-heart"></i> using React & Framer Motion
+              You've reached the end. Go touch some grass. 🌱
             </p>
           </div>
 

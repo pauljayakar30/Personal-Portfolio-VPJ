@@ -19,11 +19,10 @@ const Education = () => {
       description: "Completed higher secondary education with a focus on Science (PCM) and leadership development in a prestigious military school environment.",
       technologies: ["Mathematics", "Physics", "Chemistry", "Leadership", "Team Management"],
       achievements: [
-        "Percentage: 92% - Outstanding Performance",
+        "Percentage: 86%",
         "Mathematics, Physics, Chemistry specialization",
         "Leadership & Discipline training",
-        "Sports & Physical Fitness Excellence",
-        "Academic Excellence Award"
+        "Sports & Physical Fitness Excellence"
       ]
     },
     {
@@ -36,7 +35,7 @@ const Education = () => {
       description: "Pursuing a comprehensive program focused on AI/ML technologies, software development, and data science with strong academic performance.",
       technologies: ["Python", "Machine Learning", "Deep Learning", "Data Science", "Web Development"],
       achievements: [
-        "CGPA: 8.5/10 - Academic Excellence",
+        "CGPA: 7.4/10",
         "Core Programming & Software Engineering",
         "Machine Learning & Deep Learning Fundamentals",
         "Data Science & Analytics Projects",
