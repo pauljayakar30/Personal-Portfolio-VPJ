@@ -31,8 +31,8 @@ export default defineConfig(({ command, mode }) => {
       outDir: 'dist',
       // Disable sourcemaps in production for smaller bundle size
       sourcemap: false,
-      // Enable minification for smaller bundle size
-      minify: 'terser',
+      // Enable minification for smaller bundle size (esbuild is faster than terser)
+      minify: 'esbuild',
       // Optimize chunk splitting
       rollupOptions: {
         output: {
@@ -41,8 +41,7 @@ export default defineConfig(({ command, mode }) => {
             vendor: ['react', 'react-dom'],
             animations: ['framer-motion', 'aos'],
             router: ['react-router-dom'],
-            icons: ['react-icons'],
-            analytics: ['@vercel/analytics']
+            icons: ['react-icons']
           },
           // Optimize chunk file names for caching
           chunkFileNames: 'assets/[name]-[hash].js',
