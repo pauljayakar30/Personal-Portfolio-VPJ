@@ -12,7 +12,7 @@ const Projects = () => {
     {
       title: "Personal Portfolio Website",
       description: "A modern, responsive portfolio website built with React and featuring dark neumorphic design, interactive animations, and optimized performance.",
-      image: "/assets/project-portfolio-preview.png", // Portfolio screenshot
+      image: "/assets/project-portfolio-preview.jpeg", // Portfolio screenshot
       technologies: ["React", "CSS3", "JavaScript", "Framer Motion", "Responsive Design"],
       features: [
         "Dark Neumorphic UI Design",

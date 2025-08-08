@@ -49,6 +49,8 @@
   /* Transitions */
   --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --transition-slow: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-elastic: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* ========================= */
@@ -115,7 +117,17 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Account for fixed navbar */
+  scroll-padding-top: 90px; /* Increased to account for full navbar height */
+  /* Mobile scroll optimization */
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+}
+
+/* Mobile-specific scroll adjustments */
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 80px; /* Adjusted for mobile navbar height */
+  }
 }
 
 /* Respect user's motion preferences */
@@ -221,8 +233,282 @@ body {
   padding: 4px;
   background: linear-gradient(45deg, var(--violet-primary), var(--violet-secondary), var(--violet-light));
   box-shadow: var(--shadow-glow);
-  animation: glow-pulse 3s ease-in-out infinite alternate;
+  animation: glow-pulse 3s ease-in-out infinite alternate, float 6s ease-in-out infinite;
   position: relative;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.avatar-glow:hover {
+  transform: scale(1.05);
+  animation-play-state: paused;
+  box-shadow: 
+    var(--shadow-glow),
+    0 0 30px rgba(139, 92, 246, 0.4),
+    0 0 60px rgba(139, 92, 246, 0.2);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Scroll-triggered entrance animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-scale {
+  opacity: 0;
+  animation: fadeInScale 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Typing cursor animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.typing-cursor {
+  animation: blink 1s infinite;
+  color: var(--violet-secondary);
+  font-weight: 300;
+}
+
+/* ==================== PERFORMANCE OPTIMIZATIONS ==================== */
+
+/* Hardware acceleration for animated elements */
+.skill-card,
+.project-card,
+.experience-card,
+.avatar-glow,
+.nav-link,
+.btn-resume,
+.hero-social .social-link {
+  will-change: transform, box-shadow;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Remove will-change after animations to save memory */
+.skill-card:not(:hover):not(:active),
+.project-card:not(:hover):not(:active),
+.experience-card:not(:hover):not(:active) {
+  will-change: auto;
+}
+
+/* ==================== MOBILE ANIMATION OPTIMIZATIONS ==================== */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .avatar-glow {
+    animation: none !important;
+  }
+}
+
+/* Mobile-specific animation adjustments */
+@media (max-width: 768px) {
+  /* Reduce animation intensity on mobile */
+  .skill-card:hover,
+  .skill-card:focus,
+  .skill-card:active {
+    transform: translateY(-4px) scale(1.01);
+    transition: var(--transition-smooth);
+  }
+  
+  .project-card:hover,
+  .project-card:focus,
+  .project-card:active {
+    transform: translateY(-6px) scale(1.015);
+    transition: var(--transition-smooth);
+  }
+  
+  .experience-card:hover,
+  .experience-card:focus,
+  .experience-card:active {
+    transform: translateY(-4px) scale(1.01);
+    transition: var(--transition-smooth);
+  }
+  
+  /* Reduce avatar floating animation on mobile */
+  .avatar-glow {
+    animation: glow-pulse 3s ease-in-out infinite alternate;
+  }
+  
+  .avatar-glow:hover,
+  .avatar-glow:active {
+    transform: scale(1.02);
+    animation-play-state: running;
+  }
+  
+  /* Simplified social link animations */
+  .hero-social .social-link:hover,
+  .hero-social .social-link:active {
+    transform: translateY(-2px) scale(1.05);
+    transition: var(--transition-smooth);
+  }
+  
+  /* Touch-friendly button animations */
+  .btn-resume:hover,
+  .btn-resume:active {
+    transform: translateY(-2px) scale(1.02);
+  }
+  
+  /* Reduce hero title animation intensity */
+  .hero-title:hover,
+  .hero-title:active {
+    transform: scale(1.01);
+    transition: var(--transition-smooth);
+  }
+  
+  .section-title:hover,
+  .section-title:active {
+    transform: scale(1.01);
+    transition: var(--transition-smooth);
+  }
+  
+  /* Mobile navigation optimizations */
+  .nav-link:hover,
+  .nav-link:active {
+    transform: translateY(-1px);
+    transition: var(--transition-smooth);
+  }
+  
+  .nav-link::before {
+    display: none; /* Remove shimmer effect on mobile */
+  }
+  
+  .nav-link i {
+    transition: var(--transition-smooth);
+  }
+  
+  .nav-link:hover i,
+  .nav-link:active i {
+    transform: translateY(-1px) scale(1.1);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices, use active states instead */
+  .skill-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-raised-strong), var(--shadow-glow);
+  }
+  
+  .skill-card:active {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 
+      var(--shadow-raised-strong), 
+      var(--shadow-glow),
+      0 10px 25px rgba(139, 92, 246, 0.2);
+  }
+  
+  .project-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-raised-strong), var(--shadow-glow);
+  }
+  
+  .project-card:active {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+      var(--shadow-raised-strong), 
+      var(--shadow-glow),
+      0 15px 30px rgba(139, 92, 246, 0.25);
+  }
+  
+  /* Touch-friendly social links */
+  .hero-social .social-link:hover {
+    transform: none;
+  }
+  
+  .hero-social .social-link:active {
+    transform: scale(1.05);
+    transition: var(--transition-bounce);
+  }
+  
+  /* Touch-friendly buttons */
+  .btn-resume:hover {
+    transform: none;
+  }
+  
+  .btn-resume:active {
+    transform: scale(0.98);
+    transition: var(--transition-bounce);
+  }
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 480px) {
+  /* Reduce complex animations on very small screens */
+  .avatar-glow {
+    animation: none;
+  }
+  
+  .avatar-glow:hover,
+  .avatar-glow:active {
+    transform: scale(1.01);
+  }
+  
+  /* Simplify card animations for better performance */
+  .skill-card,
+  .project-card,
+  .experience-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  /* Reduce shadow complexity on small screens */
+  .skill-card:hover,
+  .skill-card:active {
+    box-shadow: var(--shadow-raised);
+    transform: translateY(-2px);
+  }
+  
+  .project-card:hover,
+  .project-card:active {
+    box-shadow: var(--shadow-raised);
+    transform: translateY(-3px);
+  }
+  
+  /* Disable text glow effects on very small screens for better performance */
+  .hero-title:hover,
+  .hero-title:active,
+  .section-title:hover,
+  .section-title:active {
+    text-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    transform: none;
+  }
 }
 
 .avatar-glow::before {
@@ -275,6 +561,17 @@ body {
   text-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
   text-align: center;
   white-space: nowrap;
+  transition: var(--transition-smooth);
+  cursor: default;
+}
+
+.hero-title:hover {
+  text-shadow: 
+    0 4px 20px rgba(255, 255, 255, 0.2),
+    0 0 15px rgba(139, 92, 246, 0.5),
+    0 0 30px rgba(139, 92, 246, 0.3);
+  transform: scale(1.02);
+  transition: var(--transition-bounce);
 }
 
 .hero-subtitle {
@@ -379,8 +676,13 @@ body {
 }
 
 .btn-resume:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-raised-strong), var(--shadow-glow);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    var(--shadow-raised-strong), 
+    var(--shadow-glow),
+    0 10px 25px rgba(139, 92, 246, 0.4),
+    0 0 20px rgba(139, 92, 246, 0.3);
+  transition: var(--transition-bounce);
 }
 
 .btn-resume span {
@@ -420,8 +722,12 @@ body {
 
 .btn-projects:hover {
   color: var(--text-primary);
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.05);
   border-color: var(--violet-primary);
+  box-shadow: 
+    0 10px 25px rgba(139, 92, 246, 0.3),
+    0 0 15px rgba(139, 92, 246, 0.2);
+  transition: var(--transition-bounce);
 }
 
 /* Hero Social Links - Aligned with Buttons */
@@ -469,8 +775,12 @@ body {
 
 .hero-social .social-link:hover {
   color: var(--text-primary);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: var(--shadow-raised-strong), var(--shadow-glow);
+  transform: translateY(-3px) scale(1.1) rotate(5deg);
+  box-shadow: 
+    var(--shadow-raised-strong), 
+    var(--shadow-glow),
+    0 8px 20px rgba(139, 92, 246, 0.3);
+  transition: var(--transition-elastic);
 }
 
 .hero-social .social-link i {
@@ -1204,11 +1514,37 @@ body {
   border-radius: var(--radius-md);
   transition: var(--transition-smooth);
   position: relative;
+  overflow: hidden;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.nav-link:hover::before {
+  left: 100%;
 }
 
 .nav-link:hover {
   color: var(--violet-primary);
   background: rgba(139, 92, 246, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.nav-link i {
+  transition: var(--transition-bounce);
+}
+
+.nav-link:hover i {
+  transform: scale(1.2) rotate(5deg);
 }
 
 .nav-link.active {
@@ -1271,6 +1607,18 @@ body {
   font-weight: 800;
   margin-bottom: 1rem;
   color: #ffffff;
+  transition: var(--transition-smooth);
+  cursor: default;
+  position: relative;
+}
+
+.section-title:hover {
+  transform: scale(1.02);
+  text-shadow: 
+    0 0 10px rgba(139, 92, 246, 0.6),
+    0 0 20px rgba(139, 92, 246, 0.4),
+    0 0 30px rgba(139, 92, 246, 0.2);
+  transition: var(--transition-bounce);
 }
 
 .section-subtitle {
@@ -1439,8 +1787,14 @@ body {
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-raised-strong), var(--shadow-glow);
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 
+    var(--shadow-raised-strong), 
+    var(--shadow-glow),
+    0 20px 40px rgba(139, 92, 246, 0.3),
+    0 0 30px rgba(139, 92, 246, 0.2);
+  transition: var(--transition-bounce);
+  border-color: rgba(139, 92, 246, 0.4);
 }
 
 .project-image {
@@ -1923,24 +2277,6 @@ body {
   font-family: 'Syne', sans-serif;
   color: var(--text-muted);
   margin-bottom: 1.5rem;
-}
-
-.view-all-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  background: linear-gradient(135deg, var(--violet-primary), var(--violet-secondary));
-  color: var(--text-primary);
-  text-decoration: none;
-  padding: 1rem 2rem;
-  border-radius: var(--radius-xl);
-  font-weight: 600;
-  transition: var(--transition-smooth);
-}
-
-.view-all-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
 }
 
 @media (max-width: 768px) {
@@ -2687,8 +3023,13 @@ body {
 }
 
 .experience-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-raised-strong), var(--shadow-glow);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    var(--shadow-raised-strong), 
+    var(--shadow-glow),
+    0 15px 35px rgba(139, 92, 246, 0.25),
+    0 0 25px rgba(139, 92, 246, 0.15);
+  transition: var(--transition-bounce);
 }
 
 .experience-header {
@@ -3016,9 +3357,14 @@ body {
 
 /* Skills Card Hover Glow Effect */
 .skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-raised-strong), var(--shadow-glow);
-  transition: all 0.3s ease;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    var(--shadow-raised-strong), 
+    var(--shadow-glow),
+    0 15px 35px rgba(139, 92, 246, 0.25),
+    0 0 25px rgba(139, 92, 246, 0.15);
+  transition: var(--transition-bounce);
+  border-color: rgba(139, 92, 246, 0.3);
 }
 
 /* Certificate Card Hover Glow Effect */

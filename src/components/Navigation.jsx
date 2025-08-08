@@ -29,20 +29,28 @@ const Navigation = () => {
             setIsScrolled(scrollY > 50)
             lastScrollY = scrollY
 
-            // Handle active section detection with optimized threshold
+            // Handle active section detection with improved accuracy
             const sections = navItems.map(item => item.id)
+            const navbar = document.querySelector('.navbar')
+            const navbarHeight = navbar ? navbar.offsetHeight : 80
+            
+            let currentSection = 'home' // default
             
             for (const sectionId of sections) {
               const section = document.getElementById(sectionId)
               if (section) {
                 const rect = section.getBoundingClientRect()
-                // Adjusted threshold for smoother section detection
-                if (rect.top <= 120 && rect.bottom >= 80) {
-                  setActiveSection(sectionId)
+                // More accurate threshold based on actual navbar height
+                const threshold = navbarHeight + 50
+                
+                if (rect.top <= threshold && rect.bottom >= threshold) {
+                  currentSection = sectionId
                   break
                 }
               }
             }
+            
+            setActiveSection(currentSection)
           }
 
           ticking = false
@@ -62,19 +70,31 @@ const Navigation = () => {
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId)
     if (section) {
-      // Enhanced smooth scrolling with custom options
-      section.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest'
+      // Get navbar height dynamically
+      const navbar = document.querySelector('.navbar')
+      const navbarHeight = navbar ? navbar.offsetHeight : 90
+      
+      // Calculate precise scroll position
+      const elementPosition = section.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - 15
+      
+      // Smooth scroll with precise positioning
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
       })
       
-      // Alternative smooth scroll implementation for better browser support
-      // const offsetTop = section.getBoundingClientRect().top + window.pageYOffset - 80
-      // window.scrollTo({
-      //   top: offsetTop,
-      //   behavior: 'smooth'
-      // })
+      // Update active section immediately for better UX
+      setActiveSection(sectionId)
+      
+      // Double-check active section after scroll completes
+      setTimeout(() => {
+        const rect = section.getBoundingClientRect()
+        const threshold = navbarHeight + 50
+        if (rect.top <= threshold && rect.bottom >= threshold) {
+          setActiveSection(sectionId)
+        }
+      }, 600) // Wait for smooth scroll to complete
     }
   }
 

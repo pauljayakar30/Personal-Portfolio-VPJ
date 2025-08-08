@@ -243,18 +243,6 @@ const Certifications = () => {
             </motion.div>
           ))}
         </motion.div>
-
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-          <motion.a
-            href="#certifications"
-            className="view-all-btn"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span>View All Certificates</span>
-            <i className="fas fa-arrow-right"></i>
-          </motion.a>
-        </div>
       </div>
     </section>
   )
