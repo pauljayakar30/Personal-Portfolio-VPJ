@@ -12,7 +12,7 @@ const Projects = () => {
     {
       title: "Personal Portfolio Website",
       description: "A modern, responsive portfolio website built with React and featuring dark neumorphic design, interactive animations, and optimized performance.",
-      image: "/assets/project-portfolio-preview.png", // Portfolio screenshot
+      image: "/myphoto.jpg", // Using existing photo as placeholder
       technologies: ["React", "CSS3", "JavaScript", "Framer Motion", "Responsive Design"],
       features: [
         "Dark Neumorphic UI Design",
@@ -25,6 +25,40 @@ const Projects = () => {
         github: "https://github.com/pauljayakar30/Personal-Portfolio-VPJ"
       },
       status: "completed"
+    },
+    {
+      title: "AI Chatbot Assistant",
+      description: "An intelligent chatbot powered by machine learning algorithms, capable of natural language processing and contextual responses.",
+      image: "/myphoto.jpg", // Placeholder
+      technologies: ["Python", "TensorFlow", "NLP", "Flask", "Machine Learning"],
+      features: [
+        "Natural Language Processing",
+        "Context-Aware Responses", 
+        "Machine Learning Integration",
+        "Real-time Communication",
+        "Scalable Architecture"
+      ],
+      links: {
+        github: "https://github.com/pauljayakar30"
+      },
+      status: "in-progress"
+    },
+    {
+      title: "Smart Home IoT System",
+      description: "IoT-based home automation system using sensors and machine learning for intelligent energy management and security monitoring.",
+      image: "/myphoto.jpg", // Placeholder
+      technologies: ["Python", "IoT", "Raspberry Pi", "Machine Learning", "Cloud"],
+      features: [
+        "Sensor Integration",
+        "Energy Optimization",
+        "Security Monitoring",
+        "Mobile App Control",
+        "Data Analytics"
+      ],
+      links: {
+        github: "https://github.com/pauljayakar30"
+      },
+      status: "planned"
     }
   ]
 

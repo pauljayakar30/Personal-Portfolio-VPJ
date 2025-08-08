@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-// Clean Navigation Component - Mobile navigation removed
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
@@ -90,6 +89,7 @@ const Navigation = () => {
               </motion.a>
             ))}
           </div>
+
         </div>
       </motion.nav>
     </>

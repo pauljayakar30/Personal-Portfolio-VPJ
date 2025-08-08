@@ -62,22 +62,10 @@ const HeroSection = () => {
             </a>
             
             <div className="hero-social">
-              <a 
-                href="https://linkedin.com/in/pauljayakar30" 
-                className="social-link" 
-                aria-label="LinkedIn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://linkedin.com/in/pauljayakar30" className="social-link" aria-label="LinkedIn">
                 <i className="fab fa-linkedin"></i>
               </a>
-              <a 
-                href="https://github.com/pauljayakar30" 
-                className="social-link" 
-                aria-label="GitHub"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://github.com/pauljayakar30" className="social-link" aria-label="GitHub">
                 <i className="fab fa-github"></i>
               </a>
               <a href="mailto:pauljayakar30@gmail.com" className="social-link" aria-label="Email">
@@ -89,7 +77,7 @@ const HeroSection = () => {
         
         <div className="hero-avatar">
           <div className="avatar-glow">
-            <img src="/myphoto.jpg" alt="Vasu Paul Jayakar" />
+            <img src="/assets/myphoto.jpg" alt="Vasu Paul Jayakar" />
           </div>
         </div>
       </div>
