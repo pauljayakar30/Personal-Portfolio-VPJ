@@ -10,7 +10,8 @@ export const initGA = () => {
       GA_MEASUREMENT_ID,
       IS_ANALYTICS_ENABLED,
       IS_DEBUG_MODE,
-      gtag_available: typeof window.gtag !== 'undefined'
+      gtag_available: typeof window.gtag !== 'undefined',
+      location: window.location.href
     });
   }
   
@@ -18,9 +19,25 @@ export const initGA = () => {
     console.log('Google Analytics disabled');
     return;
   }
+
+  // Check if Google Analytics loaded successfully
+  const checkGALoaded = () => {
+    if (typeof window.gtag !== 'undefined') {
+      if (IS_DEBUG_MODE) {
+        console.log(`Google Analytics initialized with ID: ${GA_MEASUREMENT_ID}`);
+      }
+      return true;
+    } else {
+      console.warn('Google Analytics blocked or failed to load (possibly by ad blocker)');
+      return false;
+    }
+  };
+
+  // Try to initialize, with fallback logging
+  setTimeout(checkGALoaded, 2000);
   
   if (IS_DEBUG_MODE) {
-    console.log(`Google Analytics initialized with ID: ${GA_MEASUREMENT_ID}`);
+    console.log(`Google Analytics setup attempted with ID: ${GA_MEASUREMENT_ID}`);
   }
 };
 
