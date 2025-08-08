@@ -1,10 +1,19 @@
 // Google Analytics utility functions
 export const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-116KVGTWPW';
-export const IS_ANALYTICS_ENABLED = import.meta.env.VITE_ENABLE_ANALYTICS === 'true';
+export const IS_ANALYTICS_ENABLED = import.meta.env.VITE_ENABLE_ANALYTICS !== 'false'; // Default to true
 export const IS_DEBUG_MODE = import.meta.env.VITE_DEBUG_MODE === 'true';
 
 // Initialize Google Analytics
 export const initGA = () => {
+  if (IS_DEBUG_MODE) {
+    console.log('Analytics Config:', {
+      GA_MEASUREMENT_ID,
+      IS_ANALYTICS_ENABLED,
+      IS_DEBUG_MODE,
+      gtag_available: typeof window.gtag !== 'undefined'
+    });
+  }
+  
   if (!IS_ANALYTICS_ENABLED) {
     console.log('Google Analytics disabled');
     return;
@@ -17,9 +26,14 @@ export const initGA = () => {
 
 // Track page views
 export const trackPageView = (page_title, page_location) => {
-  if (!IS_ANALYTICS_ENABLED || typeof gtag === 'undefined') return;
+  if (!IS_ANALYTICS_ENABLED || typeof window.gtag === 'undefined') {
+    if (IS_DEBUG_MODE) {
+      console.log('GA: Cannot track page view - gtag not available or analytics disabled');
+    }
+    return;
+  }
   
-  gtag('event', 'page_view', {
+  window.gtag('event', 'page_view', {
     page_title,
     page_location,
   });
@@ -31,9 +45,14 @@ export const trackPageView = (page_title, page_location) => {
 
 // Track custom events
 export const trackEvent = (action, category = 'engagement', label = '', value = 1) => {
-  if (!IS_ANALYTICS_ENABLED || typeof gtag === 'undefined') return;
+  if (!IS_ANALYTICS_ENABLED || typeof window.gtag === 'undefined') {
+    if (IS_DEBUG_MODE) {
+      console.log('GA: Cannot track event - gtag not available or analytics disabled');
+    }
+    return;
+  }
   
-  gtag('event', action, {
+  window.gtag('event', action, {
     event_category: category,
     event_label: label,
     value: value,
