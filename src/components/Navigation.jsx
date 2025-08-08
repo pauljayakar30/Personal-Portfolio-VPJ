@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
+// Clean Navigation Component - Mobile navigation removed
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
@@ -16,23 +17,30 @@ const Navigation = () => {
 
   useEffect(() => {
     let ticking = false
+    let lastScrollY = 0
 
     const handleScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           const scrollY = window.scrollY
-          setIsScrolled(scrollY > 50)
-
-          // Handle active section detection
-          const sections = navItems.map(item => item.id)
           
-          for (const sectionId of sections) {
-            const section = document.getElementById(sectionId)
-            if (section) {
-              const rect = section.getBoundingClientRect()
-              if (rect.top <= 100 && rect.bottom >= 100) {
-                setActiveSection(sectionId)
-                break
+          // Only update if scroll position changed significantly
+          if (Math.abs(scrollY - lastScrollY) > 5) {
+            setIsScrolled(scrollY > 50)
+            lastScrollY = scrollY
+
+            // Handle active section detection with optimized threshold
+            const sections = navItems.map(item => item.id)
+            
+            for (const sectionId of sections) {
+              const section = document.getElementById(sectionId)
+              if (section) {
+                const rect = section.getBoundingClientRect()
+                // Adjusted threshold for smoother section detection
+                if (rect.top <= 120 && rect.bottom >= 80) {
+                  setActiveSection(sectionId)
+                  break
+                }
               }
             }
           }
@@ -43,7 +51,8 @@ const Navigation = () => {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    // Use passive event listener for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true })
     
     return () => {
       window.removeEventListener('scroll', handleScroll)
@@ -53,7 +62,19 @@ const Navigation = () => {
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId)
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' })
+      // Enhanced smooth scrolling with custom options
+      section.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      })
+      
+      // Alternative smooth scroll implementation for better browser support
+      // const offsetTop = section.getBoundingClientRect().top + window.pageYOffset - 80
+      // window.scrollTo({
+      //   top: offsetTop,
+      //   behavior: 'smooth'
+      // })
     }
   }
 
@@ -89,7 +110,6 @@ const Navigation = () => {
               </motion.a>
             ))}
           </div>
-
         </div>
       </motion.nav>
     </>

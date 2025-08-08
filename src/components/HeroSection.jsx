@@ -36,48 +36,68 @@ const HeroSection = () => {
   return (
     <section className="hero">
       <div className="hero-content">
-        <div className="hero-text">
+        <div className="hero-main">
           <h1 className="hero-title">
             Vasu Paul Jayakar
           </h1>
           
-          <div className="hero-subtitle">
-            <span className="typing-text">{text}</span>
-            <span className="cursor">|</span>
-          </div>
-          
-          <p className="hero-description">
-            Passionate about artificial intelligence and machine learning, crafting innovative solutions 
-            with modern web technologies. Currently pursuing AIML at Mohan Babu University.
-          </p>
-          
-          <div className="hero-actions">
-            <a 
-              href="/Vasu-Paul-Jayakar-Resume.pdf" 
-              className="btn-resume" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <span>Resume</span>
-            </a>
-            
-            <div className="hero-social">
-              <a href="https://linkedin.com/in/pauljayakar30" className="social-link" aria-label="LinkedIn">
-                <i className="fab fa-linkedin"></i>
-              </a>
-              <a href="https://github.com/pauljayakar30" className="social-link" aria-label="GitHub">
-                <i className="fab fa-github"></i>
-              </a>
-              <a href="mailto:pauljayakar30@gmail.com" className="social-link" aria-label="Email">
-                <i className="fas fa-envelope"></i>
-              </a>
+          <div className="hero-layout">
+            <div className="hero-left">
+              <div className="hero-role">
+                <div className="hero-subtitle">
+                  <span className="typing-text">{text}</span>
+                  <span className="cursor">|</span>
+                </div>
+              </div>
+              
+              <p className="hero-description">
+                Passionate about artificial intelligence and machine learning, crafting innovative solutions 
+                with modern web technologies. Currently pursuing AIML at Mohan Babu University.
+              </p>
+              
+              <div className="hero-actions">
+                <a 
+                  href="/Vasu-Paul-Jayakar-Resume.pdf" 
+                  className="btn-resume" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <span>Resume</span>
+                </a>
+                
+                <div className="hero-social">
+                  <a 
+                    href="https://linkedin.com/in/pauljayakar30" 
+                    className="social-link" 
+                    aria-label="LinkedIn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-linkedin"></i>
+                  </a>
+                  <a 
+                    href="https://github.com/pauljayakar30" 
+                    className="social-link" 
+                    aria-label="GitHub"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-github"></i>
+                  </a>
+                  <a href="mailto:pauljayakar30@gmail.com" className="social-link" aria-label="Email">
+                    <i className="fas fa-envelope"></i>
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        
-        <div className="hero-avatar">
-          <div className="avatar-glow">
-            <img src="/assets/myphoto.jpg" alt="Vasu Paul Jayakar" />
+            
+            <div className="hero-right">
+              <div className="hero-avatar">
+                <div className="avatar-glow">
+                  <img src="/myphoto.jpg" alt="Vasu Paul Jayakar" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

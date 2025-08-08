@@ -269,61 +269,12 @@ body {
   font-size: 4rem;
   font-weight: 800;
   margin-bottom: 2rem;
-  background: linear-gradient(
-    45deg,
-    #ffffff 0%,
-    var(--violet-primary) 25%,
-    #ffffff 50%,
-    #000000 75%,
-    var(--violet-secondary) 100%
-  );
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ffffff;
   position: relative;
   z-index: 1;
+  text-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
   text-align: center;
   white-space: nowrap;
-  animation: nameGradientFlow 4s ease-in-out infinite;
-  text-shadow: 
-    0 0 20px rgba(139, 92, 246, 0.3),
-    0 4px 8px rgba(0, 0, 0, 0.4),
-    0 8px 16px rgba(139, 92, 246, 0.2);
-  filter: drop-shadow(0 4px 12px rgba(139, 92, 246, 0.3));
-}
-
-@keyframes nameGradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 100% 50%;
-  }
-  50% {
-    background-position: 50% 100%;
-  }
-  75% {
-    background-position: 0% 100%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes nameGlow {
-  0%, 100% {
-    filter: drop-shadow(0 4px 12px rgba(139, 92, 246, 0.3));
-  }
-  50% {
-    filter: drop-shadow(0 6px 20px rgba(139, 92, 246, 0.5));
-  }
-}
-
-.hero-title:hover {
-  animation: nameGradientFlow 2s ease-in-out infinite, nameGlow 2s ease-in-out infinite;
-  transform: scale(1.02);
-  transition: transform 0.3s ease;
 }
 
 .hero-subtitle {
