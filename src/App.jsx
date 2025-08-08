@@ -9,17 +9,11 @@ import Navigation from './components/Navigation';
 import FooterComponent from './components/FooterComponent';
 import { useEffect, useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
-import { initGA, trackPageView } from './utils/analytics';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Initialize Google Analytics
-    initGA();
-    
-    // Track initial page view
-    trackPageView('Portfolio Home', window.location.href);
     // Always apply dark mode class to body
     document.body.classList.add('dark-mode');
     

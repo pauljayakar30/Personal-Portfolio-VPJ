@@ -1,7 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { trackPortfolioEvent } from '../utils/analytics'
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -108,7 +107,6 @@ const Projects = () => {
                         className="project-link"
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={() => trackPortfolioEvent.projectLinkClick(project.title, 'Live Demo')}
                       >
                         <i className="fas fa-external-link-alt"></i>
                         <span>Live Demo</span>
@@ -120,7 +118,6 @@ const Projects = () => {
                         className="project-link"
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={() => trackPortfolioEvent.projectLinkClick(project.title, 'GitHub')}
                       >
                         <i className="fab fa-github"></i>
                         <span>GitHub</span>

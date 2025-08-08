@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { trackPortfolioEvent } from '../utils/analytics'
 
 const HeroSection = () => {
   const [text, setText] = useState('')
@@ -58,7 +57,6 @@ const HeroSection = () => {
               className="btn-resume" 
               target="_blank" 
               rel="noopener noreferrer"
-              onClick={() => trackPortfolioEvent.resumeDownload()}
             >
               <span>Resume</span>
             </a>
@@ -70,7 +68,6 @@ const HeroSection = () => {
                 aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackPortfolioEvent.socialLinkClick('LinkedIn')}
               >
                 <i className="fab fa-linkedin"></i>
               </a>
@@ -80,11 +77,10 @@ const HeroSection = () => {
                 aria-label="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackPortfolioEvent.socialLinkClick('GitHub')}
               >
                 <i className="fab fa-github"></i>
               </a>
-              <a href="mailto:pauljayakar30@gmail.com" className="social-link" aria-label="Email" onClick={() => trackPortfolioEvent.socialLinkClick('Email')}>
+              <a href="mailto:pauljayakar30@gmail.com" className="social-link" aria-label="Email">
                 <i className="fas fa-envelope"></i>
               </a>
             </div>
