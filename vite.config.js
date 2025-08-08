@@ -7,6 +7,7 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   
   return {
+    publicDir: 'public',
     plugins: [
       react({
         // Enable Fast Refresh for better development experience
